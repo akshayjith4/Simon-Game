@@ -55,7 +55,7 @@ This project is licensed under the [MIT License](LICENSE). Because everyone dese
 
 ## 📞 Contact
 
-Have questions, comments, or just want to share your high score? Drop us a line at [akshayjithps007.com](mailto:your-email@example.com).
+Have questions, comments, or just want to share your high score? Drop us a line at [akshayjithps007.com](mailto:akshayjithps007.com).
 
 ---
 
