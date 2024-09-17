@@ -29,7 +29,7 @@ function playAudio(chosenColour) {
     }
 }
 
-$(".btn").click(function() {
+$(".btn").on("click touchstart", function() {
     if (!started) return;
     var clickedButton = $(this);
     var userChosenColour = clickedButton.attr('id');
@@ -60,7 +60,7 @@ function checkAnswer(currentLevel) {
     }
 }
 
-$(document).on('keypress click', function() {
+$(document).on('keypress touchstart', function() {
     if (!started) {
         nextSequence();
         started = true;
