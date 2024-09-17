@@ -60,7 +60,7 @@ function checkAnswer(currentLevel) {
     }
 }
 
-$(document).keypress(function() {
+$(document).on('keypress click', function() {
     if (!started) {
         nextSequence();
         started = true;
