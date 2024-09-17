@@ -11,16 +11,25 @@ body {
 }
 
 .container {
-  display: block;
-  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
   margin: auto;
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
+  margin: 10px;
+  flex: 1 1 150px;
+  max-width: 150px;
+  height: 150px;
+  width: 150px;
   border: 10px solid black;
   border-radius: 20%;
   transition: background-color 0.3s, box-shadow 0.3s;
@@ -63,15 +72,15 @@ body {
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .btn {
-    height: 150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
   }
 
   #level-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   #level-display {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 }
