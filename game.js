@@ -56,12 +56,12 @@ function animatePress(currentColor) {
     }, 100);
 }
 
-// Handle button clicks and touch events
-$(".btn").on("click touchstart", function (e) {
-    e.preventDefault(); // Prevent default action
-    e.stopPropagation(); // Stop event from propagating
 
-    if (!started) return; // Prevent button press before game starts
+$(".btn").on("click touchstart", function (e) {
+    e.preventDefault(); 
+    e.stopPropagation(); 
+
+    if (!started) return; 
 
     var clickedButton = $(this);
     var userChosenColour = clickedButton.attr('id');
