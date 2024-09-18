@@ -12,11 +12,31 @@ var soundMap = {
     "wrong": new Audio('./sounds/wrong.mp3')
 };
 
+// Start the game when a key is pressed or screen is touched
+$(document).on('keydown', function () {
+    if (!started) {
+        startGame();
+    }
+});
+
+$(document).on('touchstart', function () {
+    if (!started) {
+        startGame();
+    }
+});
+
+function startGame() {
+    nextSequence();
+    started = true;
+    $("#level-title").text("Simon Game");
+}
+
 function nextSequence() {
     userClickedPattern = [];
     var randomNumber = Math.floor(Math.random() * 4);
     var randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
+
     playAudio(randomChosenColour);
     $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
     level++;
@@ -29,11 +49,24 @@ function playAudio(chosenColour) {
     }
 }
 
-$(".btn").on("click touchstart", function() {
-    if (!started) return;
+function animatePress(currentColor) {
+    $("#" + currentColor).addClass("pressed");
+    setTimeout(function () {
+        $("#" + currentColor).removeClass("pressed");
+    }, 100);
+}
+
+// Handle button clicks and touch events
+$(".btn").on("click touchstart", function (e) {
+    e.preventDefault(); // Prevent default action
+    e.stopPropagation(); // Stop event from propagating
+
+    if (!started) return; // Prevent button press before game starts
+
     var clickedButton = $(this);
     var userChosenColour = clickedButton.attr('id');
     playAudio(userChosenColour);
+    animatePress(userChosenColour);
     userClickedPattern.push(userChosenColour);
     checkAnswer(userClickedPattern.length - 1);
 });
@@ -41,15 +74,15 @@ $(".btn").on("click touchstart", function() {
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         if (userClickedPattern.length === gamePattern.length) {
-            setTimeout(function() {
+            setTimeout(function () {
                 nextSequence();
             }, 1500);
         }
     } else {
-        //game over
+        // Game over
         playAudio("wrong");
         $("body").addClass("game-over");
-        setTimeout(function() {
+        setTimeout(function () {
             $("body").removeClass("game-over");
         }, 200);
         $("#level-title").text("Game Over, Press Any Key to Restart");
@@ -59,11 +92,3 @@ function checkAnswer(currentLevel) {
         started = false;
     }
 }
-
-$(document).on('keypress touchstart', function() {
-    if (!started) {
-        nextSequence();
-        started = true;
-        $("#level-title").text("Simon Game");
-    }
-});
